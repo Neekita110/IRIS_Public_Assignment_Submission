@@ -1,74 +1,91 @@
-Overview
-This project implements a FastAPI application that reads and processes an Excel file (Data/capbudg.xls) and exposes endpoints for:
+## Project Structure
 
-Listing all tables (sheet names)
+```
+IRIS_Public_Assignment/
+│
+├── Data/
+│   └── capbudg.xls
+├── main.py
+├── README.md
+└── IRIS_Postman_Collection.json
+```
 
-Listing row names of a table
+## main.py
 
-Summing all numeric values in a specified row
+## README.md
 
-How to Run
-Install dependencies:
+# IRIS Public Assignment – FastAPI Excel Processor
 
-bash
-pip install fastapi uvicorn pandas openpyxl xlrd
-Start the API server:
+## Overview
 
-bash
-uvicorn main:app --reload --host 0.0.0.0 --port 9090
-API Documentation:
-Visit http://localhost:9090/docs for interactive Swagger UI.
+This project implements a FastAPI application that reads and processes an Excel file (`Data/capbudg.xls`) and exposes endpoints for:
 
-Endpoints
-Endpoint	Method	Description
-/list_tables	GET	Lists all tables (sheet names) in the Excel file
-/get_table_details	GET	Lists row names for a given table
-/row_sum	GET	Returns the sum of numeric values in a specified row
-Example Usage
-List Tables:
-GET http://localhost:9090/list_tables
+- Listing all tables (sheet names)
+- Listing row names of a table
+- Summing all numeric values in a specified row
 
-Get Table Details:
-GET http://localhost:9090/get_table_details?table_name=Initial%20Investment
+## How to Run
 
-Row Sum:
-GET http://localhost:9090/row_sum?table_name=Initial%20Investment&row_name=Tax%20Credit%20(if%20any%20)=
+1. **Install dependencies:**
+   ```bash
+   pip install fastapi uvicorn pandas openpyxl xlrd
+   ```
 
-Notes
-Only numeric values are summed; units like % are ignored.
+2. **Start the API server:**
+   ```bash
+   uvicorn main:app --reload --host 0.0.0.0 --port 9090
+   ```
 
-Errors are returned for missing tables/rows or malformed requests.
+3. **API Documentation:**  
+   Visit `http://localhost:9090/docs` for interactive Swagger UI.
 
-Potential Improvements
-Support for .xlsx, .csv, and Google Sheets.
+## Endpoints
 
-File upload endpoint for dynamic Excel processing.
+| Endpoint            | Method | Description                                                |
+|---------------------|--------|------------------------------------------------------------|
+| /list_tables        | GET    | Lists all tables (sheet names) in the Excel file           |
+| /get_table_details  | GET    | Lists row names for a given table                          |
+| /row_sum            | GET    | Returns the sum of numeric values in a specified row       |
 
-Advanced data operations (filter, aggregate, export).
+### Example Usage
 
-Simple web UI for non-technical users.
+- **List Tables:**  
+  `GET http://localhost:9090/list_tables`
 
-Authentication for production use.
+- **Get Table Details:**  
+  `GET http://localhost:9090/get_table_details?table_name=Initial%20Investment`
 
-Caching for large files.
+- **Row Sum:**  
+  `GET http://localhost:9090/row_sum?table_name=Initial%20Investment&row_name=Tax%20Credit%20(if%20any%20)=`
 
-Missed Edge Cases
-Empty Excel files: returns an error.
+## Notes
 
-Tables with no numeric data: returns 0.
+- Only numeric values are summed; units like `%` are ignored.
+- Errors are returned for missing tables/rows or malformed requests.
 
-Merged cells or irregular structures: may yield unpredictable results.
+## Potential Improvements
 
-Special characters: handled, but malformed files may cause issues.
+- Support for `.xlsx`, `.csv`, and Google Sheets.
+- File upload endpoint for dynamic Excel processing.
+- Advanced data operations (filter, aggregate, export).
+- Simple web UI for non-technical users.
+- Authentication for production use.
+- Caching for large files.
 
-Postman Collection
-A sample Postman collection (IRIS_Postman_Collection.json) is included with all endpoints and example requests.
+## Missed Edge Cases
 
-Submission Checklist
- FastAPI application code
+- Empty Excel files: returns an error.
+- Tables with no numeric data: returns `0`.
+- Merged cells or irregular structures: may yield unpredictable results.
+- Special characters: handled, but malformed files may cause issues.
 
- README.md with instructions and insights
+## Postman Collection
 
- Postman collection for endpoint testing
+A sample Postman collection (`IRIS_Postman_Collection.json`) is included with all endpoints and example requests.
 
- Public repository structure
+## Submission Checklist
+
+- [x] FastAPI application code
+- [x] README.md with instructions and insights
+- [x] Postman collection for endpoint testing
+- [x] Public repository structure
